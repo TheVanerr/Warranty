@@ -30,14 +30,20 @@ async function initSystem() {
     renderCurrentDocument();
 }
 
-// garanti.md dosyasını fetch ile yükle
+// Dile göre doğru markdown dosyasını fetch ile yükle
 async function loadGarantiMarkdown() {
+    const langMap = {
+        tr: 'garanti.md',
+        en: 'warranty.md',
+        de: 'garantie.md'
+    };
+    const fileName = langMap[currentLang] || 'garanti.md';
     try {
-        const response = await fetch('garanti.md');
+        const response = await fetch(fileName);
         garantiMarkdown = await response.text();
     } catch (error) {
-        console.error('garanti.md yüklenemedi:', error);
-        garantiMarkdown = '# Garanti Belgesi\n\nDosya yüklenemedi.';
+        console.error(`${fileName} yüklenemedi:`, error);
+        garantiMarkdown = `# ${fileName}\n\nDosya yüklenemedi.`;
     }
 }
 
@@ -94,10 +100,13 @@ function switchDoc(docType) {
     renderCurrentDocument();
 }
 
-// Dil Değişim Fonksiyonu (sadece CE belgesinde etki eder)
-function handleLanguageChange() {
+// Dil Değişim Fonksiyonu
+async function handleLanguageChange() {
     currentLang = document.getElementById('langSelect').value;
-    if (currentDoc === 'ce') {
+    if (currentDoc === 'garanti') {
+        await loadGarantiMarkdown();
+        renderCurrentDocument();
+    } else if (currentDoc === 'ce') {
         renderCurrentDocument();
     }
 }
