@@ -123,6 +123,7 @@ function renderWarrantyDocument(markdownText) {
                     ${pageHtml}
                 </div>
                 <div class="page-footer">
+                    <span class="page-number">CNK MAKİNE SANAYİ A.Ş.</span>
                     <span class="page-number">Sayfa ${index + 1} / ${pages.length}</span>
                 </div>
             </div>
