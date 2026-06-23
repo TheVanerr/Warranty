@@ -7,8 +7,30 @@
  * Canva ölçülerine göre tasarlanmıştır (cm cinsinden)
  * A4 sayfa boyutu: 21cm x 29.7cm
  */
+// Kapak Sayfası Çok Dilli Etiketler
+const coverLabels = {
+    tr: {
+        title: 'GARANTİ BELGESİ',
+        serialNumber: 'Seri Numarası :',
+        machineModel: 'Makine Modeli :',
+        deliveryDate: 'Teslim Tarihi :'
+    },
+    en: {
+        title: 'WARRANTY CARD',
+        serialNumber: 'Serial Number :',
+        machineModel: 'Machine Model :',
+        deliveryDate: 'Delivery Date :'
+    },
+    de: {
+        title: 'GARANTIEKARTE',
+        serialNumber: 'Seriennummer :',
+        machineModel: 'Maschinenmodell :',
+        deliveryDate: 'Lieferdatum :'
+    }
+};
+
 const coverConfig = {
-    // "WARRANTY CARD" başlığı ayarları
+    // Başlık (dil değişkeninden gelir)
     title: {
         text: 'WARRANTY CARD',
         font: 'Calibri',
@@ -52,9 +74,20 @@ const coverConfig = {
  * @returns {string} Kapak sayfası HTML
  */
 function renderCoverPage() {
-    const seriVal = document.getElementById('input-seri')?.value || '__________________';
-    const tarihVal = document.getElementById('input-tarih')?.value || '__________________';
-    const modelVal = document.getElementById('input-model')?.value || '__________________';
+    const seriRaw   = document.getElementById('input-seri')?.value  || '';
+    const modelRaw  = document.getElementById('input-model')?.value || '';
+    const tarihRaw  = document.getElementById('input-tarih')?.value || '';
+
+    const seriVal  = seriRaw  || '__________________';
+    const modelVal = modelRaw || '__________________';
+    const tarihVal = tarihRaw || '__________________';
+
+    // Mevcut dile göre etiketleri seç (currentLang doc.js'den gelir)
+    const lang = (typeof currentLang !== 'undefined' ? currentLang : 'en');
+    const lbl = coverLabels[lang] || coverLabels['en'];
+
+    // Değer girilmişse alt çizgiyi kaldır
+    const line = (raw) => raw ? 'border-bottom:none;' : '';
 
     return `
         <div class="a4-page cover-page-new" style="height:297mm;min-height:297mm;position:relative;overflow:hidden;padding:0;background:#fff;display:block;">
@@ -65,22 +98,22 @@ function renderCoverPage() {
             <!-- Ana İçerik (kırmızı barın sağında) -->
             <div class="cover-body">
 
-                <!-- WARRANTY CARD Başlığı -->
-                <div class="cover-main-title">${coverConfig.title.text}</div>
+                <!-- Dile göre başlık -->
+                <div class="cover-main-title">${lbl.title}</div>
 
-                <!-- Bilgi Kutusu (Serial Number, Machine Model, Delivery Date) -->
+                <!-- Bilgi Kutusu (dile göre etiketler) -->
                 <div class="cover-info-box">
                     <div class="cover-info-line">
-                        <span class="info-label">Serial Number :</span>
-                        <span class="info-value">${seriVal}</span>
+                        <span class="info-label">${lbl.serialNumber}</span>
+                        <span class="info-value" style="${line(seriRaw)}">${seriVal}</span>
                     </div>
                     <div class="cover-info-line">
-                        <span class="info-label">Machine Model :</span>
-                        <span class="info-value">${modelVal}</span>
+                        <span class="info-label">${lbl.machineModel}</span>
+                        <span class="info-value" style="${line(modelRaw)}">${modelVal}</span>
                     </div>
                     <div class="cover-info-line">
-                        <span class="info-label">Delivery Date :</span>
-                        <span class="info-value">${tarihVal}</span>
+                        <span class="info-label">${lbl.deliveryDate}</span>
+                        <span class="info-value" style="${line(tarihRaw)}">${tarihVal}</span>
                     </div>
                 </div>
 

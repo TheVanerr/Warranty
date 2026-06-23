@@ -125,12 +125,24 @@ function handleLogin() {
     alert('Kullanıcı giriş ekranı açılıyor...');
 }
 
-function exportPDF() {
-    alert('Grafik motoru kurallarına göre A4 alanı yakalanıyor ve PDF formatında indiriliyor...');
-}
+async function exportPDF() {
+    const pages = document.querySelectorAll('#preview-area .a4-page');
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
-function exportWord() {
-    alert('Mevcut metin yapısı .docx formatına dönüştürülüyor...');
+    for (let i = 0; i < pages.length; i++) {
+        const canvas = await html2canvas(pages[i], {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff'
+        });
+        const imgData = canvas.toDataURL('image/jpeg', 0.98);
+        if (i > 0) pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+    }
+
+    pdf.save('garanti-belgesi.pdf');
 }
 
 window.onload = initSystem;

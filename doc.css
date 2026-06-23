@@ -78,9 +78,6 @@ body {
 .btn-pdf { background-color: #dc2626; }
 .btn-pdf:hover { background-color: #b91c1c; }
 
-.btn-word { background-color: #2563eb; }
-.btn-word:hover { background-color: #1d4ed8; }
-
 /* 7-) Bayrak Seçim Combobox */
 .lang-select {
     background-color: #334155;
@@ -380,6 +377,38 @@ body {
     display: none;
 }
 
+/* ========== YAZICI / PDF ÇIKTISI ========== */
+@media print {
+    body {
+        background: white !important;
+        overflow: visible !important;
+        height: auto !important;
+    }
+    .navbar, .sidebar {
+        display: none !important;
+    }
+    .app-container {
+        display: block !important;
+        overflow: visible !important;
+    }
+    .preview-area {
+        padding: 0 !important;
+        gap: 0 !important;
+        overflow: visible !important;
+        background: white !important;
+        display: block !important;
+    }
+    .a4-page {
+        box-shadow: none !important;
+        page-break-after: always;
+        margin: 0 !important;
+    }
+    .a4-page:last-child {
+        page-break-after: avoid;
+    }
+}
+}
+
 /* ========== YENİ KAPAK SAYFASI (Canva Ölçülerine Göre) ========== */
 
 .cover-page-new {
@@ -448,7 +477,7 @@ body {
 
 .info-label {
     display: inline-block;
-    min-width: 5.5cm;
+    min-width: 3.8cm;
     font-weight: bold;
     flex-shrink: 0;
 }
