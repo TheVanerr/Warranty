@@ -126,6 +126,18 @@ function handleLogin() {
 }
 
 async function exportPDF() {
+    const seri     = (document.getElementById('input-seri')?.value     || '').trim();
+    const musteri  = (document.getElementById('input-musteri')?.value  || '').trim();
+    const model    = (document.getElementById('input-model')?.value    || '').trim();
+    const lang     = (typeof currentLang !== 'undefined' ? currentLang : 'en');
+    const lbl      = (typeof coverLabels !== 'undefined' ? coverLabels[lang] : null);
+    const fileTitle = lbl ? lbl.fileTitle : 'WARRANTY CARD';
+
+    const parts = [seri, musteri, model].filter(Boolean);
+    const filename = parts.length
+        ? parts.join('-') + ' ' + fileTitle + '.pdf'
+        : fileTitle + '.pdf';
+
     const pages = document.querySelectorAll('#preview-area .a4-page');
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
@@ -142,7 +154,7 @@ async function exportPDF() {
         pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
     }
 
-    pdf.save('garanti-belgesi.pdf');
+    pdf.save(filename);
 }
 
 window.onload = initSystem;

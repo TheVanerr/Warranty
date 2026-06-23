@@ -13,19 +13,22 @@ const coverLabels = {
         title: 'GARANTİ BELGESİ',
         serialNumber: 'Seri Numarası :',
         machineModel: 'Makine Modeli :',
-        deliveryDate: 'Teslim Tarihi :'
+        deliveryDate: 'Teslim Tarihi :',
+        fileTitle: 'GARANTİ KARTI'
     },
     en: {
         title: 'WARRANTY CARD',
         serialNumber: 'Serial Number :',
         machineModel: 'Machine Model :',
-        deliveryDate: 'Delivery Date :'
+        deliveryDate: 'Delivery Date :',
+        fileTitle: 'WARRANTY CARD'
     },
     de: {
         title: 'GARANTIEKARTE',
         serialNumber: 'Seriennummer :',
         machineModel: 'Maschinenmodell :',
-        deliveryDate: 'Lieferdatum :'
+        deliveryDate: 'Lieferdatum :',
+        fileTitle: 'GARANTIEKARTE'
     }
 };
 
