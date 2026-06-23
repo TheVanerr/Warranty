@@ -379,3 +379,118 @@ body {
 .cover-page .page-footer {
     display: none;
 }
+
+/* ========== YENİ KAPAK SAYFASI (Canva Ölçülerine Göre) ========== */
+
+.cover-page-new {
+    padding: 0 !important;
+    position: relative;
+    background-color: #ffffff;
+    overflow: hidden;
+    height: 297mm !important;
+    display: block !important;
+}
+
+/* Sol Kenar Kırmızı Dikdörtgen */
+.cover-red-bar {
+    position: absolute;
+    left: 2.1cm;
+    top: 2.1cm;
+    width: 0.93cm;
+    height: 25.5cm;
+    background-color: #ff0000;
+    z-index: 1;
+}
+
+/* Kırmızı barın sağındaki ana içerik alanı */
+.cover-body {
+    position: absolute;
+    left: 4.41cm;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2.1cm;
+    padding-right: 1.5cm;
+}
+
+/* WARRANTY CARD Başlık */
+.cover-main-title {
+    margin-top: calc(7.07cm - 2.1cm);
+    font-family: 'Calibri', 'Segoe UI', sans-serif;
+    font-size: 39pt;
+    font-weight: bold;
+    color: #ff0000;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+/* Bilgi Kutusu (Serial Number, Machine Model, Delivery Date) */
+.cover-info-box {
+    margin-top: calc(11.66cm - 7.07cm - 2.5cm);
+    width: 14.71cm;
+    font-family: 'Fira Sans', 'Segoe UI', sans-serif;
+    font-size: 15pt;
+    font-weight: bold;
+    color: #ff0000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3cm;
+}
+
+.cover-info-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3cm;
+}
+
+.info-label {
+    display: inline-block;
+    min-width: 5.5cm;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.info-value {
+    color: #ff0000;
+    font-weight: bold;
+    border-bottom: 1.5px solid #ff0000;
+    flex: 1;
+    padding-bottom: 2px;
+    min-width: 4cm;
+}
+
+/* Dolfin Logo Kutusu */
+.cover-logo-box {
+    margin-top: calc(17.37cm - 11.66cm - 2.73cm);
+    width: 12.9cm;
+    height: 4.56cm;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cover-logo-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.cover-logo-placeholder {
+    font-family: 'Calibri', sans-serif;
+    font-size: 20pt;
+    font-weight: bold;
+    color: #94a3b8;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #cbd5e1;
+}
+
+.cover-page-new .page-footer {
+    display: none;
+}
